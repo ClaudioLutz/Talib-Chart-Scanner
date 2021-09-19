@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: open-sans; 
+                color: white;
+                margin: 20px;
+                width: 960px; 
+                margin: 0 auto; 
+                background: black;
+            }
+            .bullish { 
+                background: green; 
+            }
+            .bearish { 
+                background: red; 
+            table {
+                text-align: center;
+                }
+            form {
+                text-align: center;
+                }
+            h1 {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Chart Screener</h1>
+        <form>
+            <select name="pattern">
+                {% for pattern in patterns %}
+                <option value="{{ pattern }}" {% if pattern == current_pattern
+                    %}selected='selected'{% endif %}>{{ patterns[pattern] }}</option>
+                {% endfor %}
+            </select>
+            <input type="Submit" value="Scan">
+        </form>
+        <table>
+            <tr>
+                <th>
+                    symbol
+                </th>
+                <th>
+                    company name
+                </th>
+                <th>
+                    signal
+                </th>
+            </tr>
+            {% for stock in stocks %}
+            {% if stocks[stock][current_pattern] %}
+            <tr>
+                <td>{{ stock }}</td>
+                <td>{{ stocks[stock]['company'] }}</td>
+                <td class="{{ stocks[stock][current_pattern] }}">{{
+                    stocks[stock][current_pattern] }}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <img src="https://finviz.com/chart.ashx?t={{ stock
+                        }}&ty=c&ta=1&p=d&s=l" alt="">
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </body>
+</html>

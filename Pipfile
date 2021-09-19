@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = "*"
+ta-lib = {path = "./TA_Lib-0.4.21-cp39-cp39-win_amd64.whl"}
+yfinance = "*"
+requests = "*"
+flask = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
